@@ -396,56 +396,81 @@
         showToast('Log added!','success'); openLogModal(deviceId); saveToStorage();
     }
 
-    function printDevice(deviceId) {
-        const device = devices.find(d => d.id === deviceId);
-        if (!device) return;
+   function printDevice(deviceId) {
+    const device = devices.find(d => d.id === deviceId);
+    if (!device) return;
 
-        const printWindow = window.open('', '_blank', 'width=800,height=600');
-        if (!printWindow) { showToast('Please allow pop-ups to print', 'error'); return; }
+    // إزالة إطار سابق لو وُجد
+    const oldFrame = document.getElementById('printFrame');
+    if (oldFrame) oldFrame.remove();
 
-        let logHtml = '';
-        if (device.maintenance_log && device.maintenance_log.length > 0) {
-            logHtml = '<div class="section"><h2>📝 Maintenance Log</h2>';
-            device.maintenance_log.forEach(entry => {
-                logHtml += `
-                    <div style="background:#f9f9f9;padding:8px;margin-bottom:6px;border-left:3px solid #2b6cb0;">
-                        <strong>${entry.date || ''}</strong> | Tech: ${entry.technician || 'N/A'}<br>
-                        ${entry.description || ''}<br>
-                        <em>${entry.notes || ''}</em>
-                    </div>`;
-            });
-            logHtml += '</div>';
-        }
+    let logHtml = '';
+    if (device.maintenance_log && device.maintenance_log.length) {
+        logHtml = '<div class="print-section"><h2>📝 Maintenance Log</h2>';
+        device.maintenance_log.forEach(entry => {
+            logHtml += `<div class="log-entry-print"><strong>${entry.date || ''}</strong> | Tech: ${entry.technician || 'N/A'}<br>${entry.description || ''}<br><em>${entry.notes || ''}</em></div>`;
+        });
+        logHtml += '</div>';
+    }
 
-        const printContent = `
-<!DOCTYPE html>
-<html><head><title>${device.name} - Report</title><meta charset="UTF-8">
+    const printContent = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>${device.name} - Report</title>
 <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1a202c; line-height: 1.5; margin: 40px; }
-    .header { text-align: center; border-bottom: 3px solid #1a365d; padding-bottom: 20px; margin-bottom: 20px; }
-    .header h1 { color: #1a365d; }
-    .section { margin-bottom: 20px; page-break-inside: avoid; }
-    .section h2 { color: #2b6cb0; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
-    .tag { display: inline-block; background: #eef; padding: 2px 8px; border-radius: 4px; margin: 3px; font-size: 12px; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1a202c; line-height: 1.5; margin: 30px; }
+    .print-header { text-align: center; border-bottom: 3px solid #1a365d; padding-bottom: 20px; margin-bottom: 20px; }
+    .print-header h1 { color: #1a365d; }
+    .print-section { margin-bottom: 20px; page-break-inside: avoid; }
+    .print-section h2 { color: #2b6cb0; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+    .print-tag { display: inline-block; background: #eef; padding: 2px 8px; border-radius: 4px; margin: 3px; font-size: 12px; }
     ul { padding-left: 20px; } li { margin-bottom: 6px; }
-    .footer { text-align: center; margin-top: 30px; font-size: 12px; color: #666; border-top: 1px solid #ccc; padding-top: 10px; }
+    .print-footer { text-align: center; margin-top: 30px; font-size: 12px; color: #666; border-top: 1px solid #ccc; padding-top: 10px; }
+    .log-entry-print { background: #f9f9f9; padding: 8px; margin-bottom: 6px; border-left: 3px solid #2b6cb0; }
 </style></head><body>
-<div class="header"><h1>${device.name}</h1><p><strong>${device.id}</strong> | ${getCategoryLabel(device.category)} | Risk: ${device.risk_level || 'N/A'}</p></div>
-<div class="section"><h2>📋 Standards & Classifications</h2><p><strong>IEC:</strong> ${device.iec_standard || 'N/A'}</p><p><strong>IEC Version:</strong> ${device.iec_version || 'N/A'}</p><p><strong>ISO:</strong> ${device.iso_standard || 'N/A'}</p><p><strong>AAMI:</strong> ${device.aami_standard || 'N/A'}</p><p><strong>Safety Class:</strong> ${device.safety_class || 'N/A'}</p><p><strong>Risk Level:</strong> ${device.risk_level || 'N/A'}</p><p><strong>Calibration:</strong> ${device.calibration_frequency || 'N/A'}</p></div>
-${device.parameters && device.parameters.length ? `<div class="section"><h2>⚙️ Parameters</h2><div>${device.parameters.map(p => `<span class="tag">${p}</span>`).join(' ')}</div></div>` : ''}
-${device.maintenance_tasks && device.maintenance_tasks.length ? `<div class="section"><h2>🔧 Maintenance Tasks</h2><ul>${device.maintenance_tasks.map(t => `<li>${t}</li>`).join('')}</ul></div>` : ''}
-${device.spare_parts && device.spare_parts.length ? `<div class="section"><h2>🔩 Spare Parts</h2><p>${device.spare_parts.join(', ')}</p></div>` : ''}
-${device.risk_assessment ? `<div class="section"><h2>⚠️ Risk Assessment</h2><h3>Hazards:</h3><ul>${(device.risk_assessment.hazards||[]).map(h => `<li>${h}</li>`).join('')}</ul><h3>Mitigation:</h3><ul>${(device.risk_assessment.mitigation||[]).map(m => `<li>${m}</li>`).join('')}</ul></div>` : ''}
-${device.modification_rules && device.modification_rules.length ? `<div class="section"><h2>🛡️ Modification Rules</h2><ul>${device.modification_rules.map(r => `<li>${r}</li>`).join('')}</ul></div>` : ''}
+<div class="print-header"><h1>${device.name}</h1><p><strong>${device.id}</strong> | ${getCategoryLabel(device.category)} | Risk: ${device.risk_level || 'N/A'}</p></div>
+<div class="print-section"><h2>📋 Standards & Classifications</h2><p><strong>IEC:</strong> ${device.iec_standard || 'N/A'}</p><p><strong>IEC Version:</strong> ${device.iec_version || 'N/A'}</p><p><strong>ISO:</strong> ${device.iso_standard || 'N/A'}</p><p><strong>AAMI:</strong> ${device.aami_standard || 'N/A'}</p><p><strong>Safety Class:</strong> ${device.safety_class || 'N/A'}</p><p><strong>Risk Level:</strong> ${device.risk_level || 'N/A'}</p><p><strong>Calibration:</strong> ${device.calibration_frequency || 'N/A'}</p></div>
+${device.parameters?.length ? `<div class="print-section"><h2>⚙️ Parameters</h2><div>${device.parameters.map(p => `<span class="print-tag">${p}</span>`).join(' ')}</div></div>` : ''}
+${device.maintenance_tasks?.length ? `<div class="print-section"><h2>🔧 Maintenance Tasks</h2><ul>${device.maintenance_tasks.map(t => `<li>${t}</li>`).join('')}</ul></div>` : ''}
+${device.spare_parts?.length ? `<div class="print-section"><h2>🔩 Spare Parts</h2><p>${device.spare_parts.join(', ')}</p></div>` : ''}
+${device.risk_assessment ? `<div class="print-section"><h2>⚠️ Risk Assessment</h2><h3>Hazards:</h3><ul>${(device.risk_assessment.hazards||[]).map(h => `<li>${h}</li>`).join('')}</ul><h3>Mitigation:</h3><ul>${(device.risk_assessment.mitigation||[]).map(m => `<li>${m}</li>`).join('')}</ul></div>` : ''}
+${device.modification_rules?.length ? `<div class="print-section"><h2>🛡️ Modification Rules</h2><ul>${device.modification_rules.map(r => `<li>${r}</li>`).join('')}</ul></div>` : ''}
 ${logHtml}
-<div class="footer"><p>Biomedical Devices Portfolio | Hussein Al-Abdali</p><p>Printed: ${new Date().toLocaleString()}</p></div>
+<div class="print-footer"><p>Biomedical Devices Portfolio | Hussein Al-Abdali</p><p>Printed: ${new Date().toLocaleString()}</p></div>
 </body></html>`;
 
-        printWindow.document.write(printContent);
-        printWindow.document.close();
-        printWindow.focus();
-        printWindow.print();
-        printWindow.onafterprint = function() { printWindow.close(); };
+    // إنشاء iframe ظاهر مؤقتاً
+    const iframe = document.createElement('iframe');
+    iframe.id = 'printFrame';
+    iframe.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; border:none; z-index:9999; background:white;';
+    document.body.appendChild(iframe);
+
+    const iframeDoc = iframe.contentWindow.document;
+    iframeDoc.open();
+    iframeDoc.write(printContent);
+    iframeDoc.close();
+
+    const doPrint = () => {
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+        iframe.contentWindow.onafterprint = () => {
+            iframe.remove();
+        };
+        // حذف احتياطي بعد 60 ثانية
+        setTimeout(() => {
+            if (document.getElementById('printFrame')) iframe.remove();
+        }, 60000);
+    };
+
+    iframe.onload = () => {
+        setTimeout(doPrint, 500);
+    };
+
+    // احتياط في حال عدم تشغيل onload
+    setTimeout(() => {
+        if (iframe.contentWindow && iframe.contentWindow.document.readyState === 'complete') {
+            doPrint();
+        }
+    }, 1500);
+}
     }
 
     function splitByComma(s) { return s ? s.split(',').map(x=>x.trim()).filter(x=>x) : []; }
