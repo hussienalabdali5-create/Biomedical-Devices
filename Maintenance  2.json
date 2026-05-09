@@ -1,0 +1,954 @@
+{
+  "devices": [
+    {
+      "id": "DEV-001",
+      "name": "Patient Monitor",
+      "category": "critical-care",
+      "categoryLabel": "Critical Care",
+      "color": "#e53e3e",
+      "iec_standard": "IEC 60601-2-27",
+      "iec_version": "2011 + AMD1:2019",
+      "iso_standard": "ISO 80601-2-56 (SpO₂), ISO 81060-2 (NIBP)",
+      "aami_standard": "AAMI EC13 (ECG), AAMI SP10 (NIBP)",
+      "safety_class": "Type CF (ECG/SpO₂), Type B (NIBP/TEMP)",
+      "risk_level": "Class IIa (EU MDR)",
+      "parameters": ["ECG", "SpO₂", "NIBP", "TEMP", "RESP", "EtCO₂", "IBP"],
+      "calibration_frequency": "6 months",
+      "electrical_tests": ["Patient Leakage", "Ground Resistance", "Insulation"],
+      "manufacturers": ["Philips", "GE", "Mindray", "Nihon Kohden", "Dräger"],
+      "maintenance_tasks": [
+        "Clean SpO₂ probe and check sensor alignment",
+        "Verify ECG gain (10mm/mV) and speed (25mm/s)",
+        "Calibrate NIBP against mercury sphygmomanometer",
+        "Test temperature probe accuracy against reference",
+        "Check alarm limits and audio/visual indicators",
+        "Verify battery backup duration (>30 min)"
+      ],
+      "spare_parts": ["SpO₂ probes", "ECG cables", "NIBP cuffs", "Temperature probes", "Battery"],
+      "risk_assessment": {
+        "hazards": ["Electrical shock", "False alarm", "Missed alarm", "Incorrect reading"],
+        "mitigation": ["Type CF isolation", "Dual alarm verification", "Clinical validation", "Periodic calibration"]
+      },
+      "modification_rules": [
+        "Firmware updates require validation against IEC 60601-2-27",
+        "Sensor replacements must be OEM or ISO 13485 certified",
+        "Alarm threshold changes require clinical approval",
+        "Battery replacement must maintain >30 min backup"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-002",
+      "name": "Defibrillator",
+      "category": "critical-care",
+      "categoryLabel": "Critical Care",
+      "color": "#e53e3e",
+      "iec_standard": "IEC 60601-2-4",
+      "iec_version": "2010 + AMD1:2018",
+      "iso_standard": "ISO 60601-1 (General)",
+      "aami_standard": "AAMI DF80",
+      "safety_class": "Type CF",
+      "risk_level": "Class III (EU MDR) - Life Supporting",
+      "parameters": ["Energy (J)", "Charge Time", "ECG Analysis", "Synchronization"],
+      "calibration_frequency": "6 months",
+      "electrical_tests": ["Energy Output", "Charge Time", "Sync Delay", "Patient Leakage"],
+      "manufacturers": ["Philips", "Zoll", "Physio-Control", "Cardiac Science", "Nihon Kohden"],
+      "maintenance_tasks": [
+        "Verify energy output (50-360J) with defibrillator analyzer",
+        "Test charge time (<10s to 200J)",
+        "Check ECG analysis algorithm (VF/VT detection)",
+        "Test synchronization mode (cardioversion)",
+        "Verify paddle/pad contact quality",
+        "Replace battery per manufacturer schedule"
+      ],
+      "spare_parts": ["Defibrillator pads", "Paddles", "Battery", "Capacitor (if applicable)"],
+      "risk_assessment": {
+        "hazards": ["Failure to shock", "Inappropriate shock", "Energy miscalculation", "Burns"],
+        "mitigation": ["Dual verification", "Energy calibration", "Impedance check", "Conductive gel"]
+      },
+      "modification_rules": [
+        "Energy protocol changes require physician approval",
+        "Pad/paddle replacements must be OEM",
+        "Firmware updates require full functional test",
+        "Capacitor replacement requires energy recalibration"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-003",
+      "name": "AED (Automated External Defibrillator)",
+      "category": "critical-care",
+      "categoryLabel": "Critical Care",
+      "color": "#e53e3e",
+      "iec_standard": "IEC 60601-2-4",
+      "iec_version": "2010 + AMD1:2018",
+      "iso_standard": "ISO 60601-1 (General)",
+      "aami_standard": "AAMI DF80",
+      "safety_class": "Type CF",
+      "risk_level": "Class III (EU MDR) - Life Supporting",
+      "parameters": ["Energy (J)", "Voice Prompts", "CPR Feedback", "ECG Analysis"],
+      "calibration_frequency": "12 months",
+      "electrical_tests": ["Energy Output", "Voice Prompt Clarity", "ECG Analysis Accuracy"],
+      "manufacturers": ["Philips", "Zoll", "Cardiac Science", "Defibtech", "HeartSine"],
+      "maintenance_tasks": [
+        "Test with AED simulator (various ECG rhythms)",
+        "Verify voice prompt clarity and volume",
+        "Check pad expiration dates",
+        "Test self-diagnostic functions",
+        "Verify battery status indicator",
+        "Confirm CPR feedback accuracy (if equipped)"
+      ],
+      "spare_parts": ["AED pads", "Battery"],
+      "risk_assessment": {
+        "hazards": ["Failure to detect VF", "False positive shock", "Pad adhesion failure", "Battery depletion"],
+        "mitigation": ["Algorithm validation", "Impedance check", "Expiration tracking", "Self-test monitoring"]
+      },
+      "modification_rules": [
+        "Pad replacements must be identical model",
+        "Battery replacement must be OEM",
+        "Firmware updates require full simulation test",
+        "No user-modifiable energy settings"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-004",
+      "name": "Infusion Pump",
+      "category": "critical-care",
+      "categoryLabel": "Critical Care",
+      "color": "#e53e3e",
+      "iec_standard": "IEC 60601-2-24",
+      "iec_version": "2012",
+      "iso_standard": "ISO 80601-2-24",
+      "aami_standard": "AAMI ID26",
+      "safety_class": "Type CF",
+      "risk_level": "Class IIb (EU MDR)",
+      "parameters": ["Flow Rate (ml/hr)", "VTBI", "Occlusion Pressure", "Air-in-Line", "Battery"],
+      "calibration_frequency": "6 months",
+      "electrical_tests": ["Flow Accuracy", "Occlusion Detection", "Air Bubble Detection", "Battery Duration"],
+      "manufacturers": ["B Braun", "Baxter", "Hospira", "Smiths Medical", "Terumo"],
+      "maintenance_tasks": [
+        "Verify flow accuracy (±5%) with gravimetric method",
+        "Test occlusion detection and alarm",
+        "Verify air-in-line sensor sensitivity",
+        "Check anti-free-flow mechanism",
+        "Test battery backup duration",
+        "Verify door closure sensor"
+      ],
+      "spare_parts": ["Pump mechanism", "Sensors", "Battery", "Display"],
+      "risk_assessment": {
+        "hazards": ["Over-infusion", "Under-infusion", "Free-flow", "Air embolism", "Battery failure"],
+        "mitigation": ["Flow calibration", "Anti-free-flow valve", "Air detector", "Battery monitoring", "Dual channel verification"]
+      },
+      "modification_rules": [
+        "Flow rate range changes require clinical validation",
+        "Tubing sets must be validated for pump model",
+        "Software updates require flow accuracy retest",
+        "Sensor replacements must maintain ±5% accuracy"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-005",
+      "name": "Syringe Pump",
+      "category": "critical-care",
+      "categoryLabel": "Critical Care",
+      "color": "#e53e3e",
+      "iec_standard": "IEC 60601-2-24",
+      "iec_version": "2012",
+      "iso_standard": "ISO 80601-2-24",
+      "aami_standard": "AAMI ID26",
+      "safety_class": "Type CF",
+      "risk_level": "Class IIb (EU MDR)",
+      "parameters": ["Flow Rate (ml/hr)", "Syringe Size", "Occlusion Pressure", "Bolus Rate", "Battery"],
+      "calibration_frequency": "6 months",
+      "electrical_tests": ["Flow Accuracy", "Occlusion Detection", "Syringe Recognition", "Battery Duration"],
+      "manufacturers": ["B Braun", "Baxter", "Hospira", "Smiths Medical", "Terumo"],
+      "maintenance_tasks": [
+        "Verify flow accuracy (±2%) with gravimetric method",
+        "Test occlusion detection at minimum flow",
+        "Verify syringe size recognition (5-50ml)",
+        "Check plunger detection sensor",
+        "Test battery backup duration",
+        "Verify anti-bolus mechanism"
+      ],
+      "spare_parts": ["Drive mechanism", "Syringe holder", "Sensors", "Battery"],
+      "risk_assessment": {
+        "hazards": ["Over-infusion", "Syringe misrecognition", "Occlusion undetected", "Battery failure"],
+        "mitigation": ["±2% accuracy", "Size verification", "Pressure monitoring", "Battery alarm"]
+      },
+      "modification_rules": [
+        "Syringe brand restrictions must be maintained",
+        "Flow rate accuracy must remain ±2%",
+        "Software updates require full calibration",
+        "Drive mechanism replacement requires accuracy verification"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-006",
+      "name": "Fetal Monitor",
+      "category": "critical-care",
+      "categoryLabel": "Critical Care",
+      "color": "#e53e3e",
+      "iec_standard": "IEC 60601-2-37",
+      "iec_version": "2015",
+      "iso_standard": "ISO 80601-2-37",
+      "aami_standard": "AAMI TIR69",
+      "safety_class": "Type B (Ultrasound), Type BF (ECG/TOCO)",
+      "risk_level": "Class IIa (EU MDR)",
+      "parameters": ["FHR (bpm)", "UC Frequency", "UC Duration", "UC Intensity", "Fetal Movement"],
+      "calibration_frequency": "12 months",
+      "electrical_tests": ["Ultrasound Output", "TOCO Calibration", "FHR Accuracy", "Paper Speed"],
+      "manufacturers": ["GE", "Philips", "Edan", "Contec", "Bionet"],
+      "maintenance_tasks": [
+        "Verify ultrasound output intensity (<94 mW/cm²)",
+        "Calibrate TOCO transducer against known force",
+        "Test FHR accuracy with fetal simulator",
+        "Verify paper speed (1, 2, 3 cm/min)",
+        "Check event marker functionality",
+        "Test twin monitoring capability (if equipped)"
+      ],
+      "spare_parts": ["Ultrasound transducers", "TOCO transducers", "ECG electrodes", "Paper", "Battery"],
+      "risk_assessment": {
+        "hazards": ["Excessive ultrasound exposure", "FHR misdetection", "UC measurement error", "Paper jam"],
+        "mitigation": ["Output power limits", "Signal validation", "Force calibration", "Regular maintenance"]
+      },
+      "modification_rules": [
+        "Ultrasound intensity must remain <94 mW/cm²",
+        "Transducer replacements must match acoustic output",
+        "Software updates require FHR accuracy verification",
+        "Paper speed changes require clinical approval"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-007",
+      "name": "ECG Machine",
+      "category": "critical-care",
+      "categoryLabel": "Critical Care",
+      "color": "#e53e3e",
+      "iec_standard": "IEC 60601-2-25",
+      "iec_version": "2011 + AMD1:2019",
+      "iso_standard": "ISO 80601-2-25",
+      "aami_standard": "AAMI EC13",
+      "safety_class": "Type CF",
+      "risk_level": "Class IIa (EU MDR)",
+      "parameters": ["Lead Configuration", "Gain", "Speed", "Filter Settings", "Input Impedance"],
+      "calibration_frequency": "12 months",
+      "electrical_tests": ["Gain Accuracy", "Frequency Response", "CMRR", "Input Impedance", "Lead Detection"],
+      "manufacturers": ["GE", "Philips", "Mortara", "Schiller", "Nihon Kohden"],
+      "maintenance_tasks": [
+        "Verify gain accuracy (10mm/mV ±5%)",
+        "Test frequency response (0.05-150Hz)",
+        "Measure CMRR (>80dB at 50/60Hz)",
+        "Verify input impedance (>2.5MΩ)",
+        "Check lead-off detection for all 12 leads",
+        "Calibrate paper speed (25mm/s ±5%)"
+      ],
+      "spare_parts": ["ECG cables", "Electrodes", "Paper", "Battery"],
+      "risk_assessment": {
+        "hazards": ["Misdiagnosis from artifact", "Lead misplacement undetected", "Filter distortion", "Baseline wander"],
+        "mitigation": ["CMRR verification", "Lead-off alarm", "Filter verification", "Baseline restoration check"]
+      },
+      "modification_rules": [
+        "Gain calibration must remain ±5%",
+        "Filter settings must match clinical protocol",
+        "Lead configurations must not be altered",
+        "Software updates require full performance test"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-008",
+      "name": "Electrosurgery Unit (ESU)",
+      "category": "surgical",
+      "categoryLabel": "Surgical",
+      "color": "#dd6b20",
+      "iec_standard": "IEC 60601-2-2",
+      "iec_version": "2017",
+      "iso_standard": "ISO 60601-1 (General)",
+      "aami_standard": "AAMI HF18",
+      "safety_class": "Type CF (Active electrode), Type B (Return electrode)",
+      "risk_level": "Class IIb (EU MDR)",
+      "parameters": ["Cut Power (W)", "Coag Power (W)", "Blend Mode", "Bipolar Power", "Crest Factor"],
+      "calibration_frequency": "6 months",
+      "electrical_tests": ["Output Power", "Crest Factor", "Return Electrode Monitoring", "REM Alarm"],
+      "manufacturers": ["Covidien (Medtronic)", "Ethicon (J&J)", "Erbe", "ConMed", "Bovie"],
+      "maintenance_tasks": [
+        "Verify output power (Cut/Coag/Bipolar) with ESU analyzer",
+        "Test crest factor for each mode",
+        "Verify Return Electrode Monitoring (REM) function",
+        "Test REM alarm at impedance threshold",
+        "Check footswitch/pencil activation",
+        "Verify smoke evacuation interface (if equipped)"
+      ],
+      "spare_parts": ["Active electrodes", "Return electrode pads", "Footswitches", "Handpieces"],
+      "risk_assessment": {
+        "hazards": ["Burns at return site", "Unintended activation", "Power output error", "Capacitive coupling burns"],
+        "mitigation": ["REM monitoring", "Dual activation switches", "Power calibration", "Bipolar preference"]
+      },
+      "modification_rules": [
+        "Power output must not exceed rated limits",
+        "REM function must not be disabled",
+        "Active electrode replacements must match impedance",
+        "Software updates require power recalibration"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-009",
+      "name": "Laparoscopy Instruments",
+      "category": "surgical",
+      "categoryLabel": "Surgical",
+      "color": "#dd6b20",
+      "iec_standard": "IEC 60601-2-18",
+      "iec_version": "2013",
+      "iso_standard": "ISO 8600 (Endoscopes)",
+      "aami_standard": "AAMI ST81 (Sterilization)",
+      "safety_class": "Type B (Light source), Type BF (Insufflator)",
+      "risk_level": "Class IIa (EU MDR)",
+      "parameters": ["Light Intensity", "Insufflation Pressure", "CO₂ Flow Rate", "Image Resolution", "Insulation Integrity"],
+      "calibration_frequency": "12 months",
+      "electrical_tests": ["Light Output", "Pressure Accuracy", "Flow Rate", "Insulation Resistance", "Leak Test"],
+      "manufacturers": ["Karl Storz", "Olympus", "Stryker", "Richard Wolf", "B Braun"],
+      "maintenance_tasks": [
+        "Verify light source intensity (measured at telescope tip)",
+        "Calibrate insufflator pressure (12-15 mmHg typical)",
+        "Test CO₂ flow rate accuracy",
+        "Check telescope insulation integrity (>2MΩ)",
+        "Verify camera white balance and focus",
+        "Test instrument channel patency"
+      ],
+      "spare_parts": ["Light cables", "Telescopes", "Trocars", "Instruments", "Camera heads"],
+      "risk_assessment": {
+        "hazards": ["Gas embolism", "Thermal injury", "Insulation failure", "Cross-contamination"],
+        "mitigation": ["Pressure limits", "Light intensity check", "Insulation test", "Sterilization validation"]
+      },
+      "modification_rules": [
+        "Insufflation pressure limits must not be exceeded",
+        "Telescope replacements must match optical specifications",
+        "Insulation repairs require dielectric testing",
+        "Sterilization method must match instrument material"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-010",
+      "name": "Power Supply Design",
+      "category": "testing",
+      "categoryLabel": "Testing & Calibration",
+      "color": "#d69e2e",
+      "iec_standard": "IEC 60601-1",
+      "iec_version": "2005 + AMD1:2012 + AMD2:2020",
+      "iso_standard": "ISO 13485 (Design Control)",
+      "aami_standard": "AAMI TIR32 (Medical power supplies)",
+      "safety_class": "N/A (Component)",
+      "risk_level": "N/A (Component, inherits device class)",
+      "parameters": ["Output Voltage", "Output Current", "Ripple", "Efficiency", "EMI/EMC"],
+      "calibration_frequency": "Design verification only",
+      "electrical_tests": ["Load Regulation", "Line Regulation", "Ripple", "Efficiency", "Thermal", "EMI"],
+      "manufacturers": ["TDK-Lambda", "RECOM", "CUI", "Mean Well", "XP Power"],
+      "maintenance_tasks": [
+        "Verify output voltage regulation (±1% typical)",
+        "Test load transient response",
+        "Measure ripple and noise (<1% typical)",
+        "Verify thermal performance under full load",
+        "Test EMI/EMC compliance (IEC 60601-1-2)",
+        "Verify isolation voltage (MOPP/MOOP ratings)"
+      ],
+      "spare_parts": ["Capacitors", "MOSFETs", "Transformers", "Rectifiers"],
+      "risk_assessment": {
+        "hazards": ["Overvoltage", "Thermal runaway", "Isolation failure", "EMI interference"],
+        "mitigation": ["OVP circuit", "Thermal protection", "Reinforced insulation", "EMI filtering"]
+      },
+      "modification_rules": [
+        "Output specifications must maintain ±1% regulation",
+        "Isolation ratings must meet or exceed original",
+        "EMI filtering must not be reduced",
+        "Thermal design must maintain safe temperatures"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-011",
+      "name": "ICU Ventilator",
+      "category": "respiratory",
+      "categoryLabel": "Respiratory Care",
+      "color": "#38a169",
+      "iec_standard": "IEC 60601-2-12",
+      "iec_version": "2020",
+      "iso_standard": "ISO 80601-2-80",
+      "aami_standard": "AAMI CR50",
+      "safety_class": "Type B (Airway), Type BF (Sensors)",
+      "risk_level": "Class IIb (EU MDR) - Life Supporting",
+      "parameters": ["Tidal Volume", "Respiratory Rate", "PEEP", "FiO₂", "Peak Pressure", "I:E Ratio"],
+      "calibration_frequency": "6 months",
+      "electrical_tests": ["Flow Accuracy", "Pressure Accuracy", "FiO₂ Accuracy", "Volume Accuracy", "Battery Duration"],
+      "manufacturers": ["Dräger", "Hamilton", "Maquet (Getinge)", "Medtronic", "Fisher & Paykel"],
+      "maintenance_tasks": [
+        "Verify tidal volume accuracy (±10% or ±20ml)",
+        "Calibrate flow sensors (hot-wire/ultrasonic)",
+        "Test pressure transducer accuracy",
+        "Verify FiO₂ mixing accuracy (±3%)",
+        "Test alarm functions (high pressure, disconnect, apnea)",
+        "Verify battery backup duration (>30 min)"
+      ],
+      "spare_parts": ["Flow sensors", "O₂ sensors", "Bacterial filters", "Tubing", "Battery"],
+      "risk_assessment": {
+        "hazards": ["Barotrauma", "Volutrauma", "Hypoxia", "Hyperoxia", "Disconnect undetected"],
+        "mitigation": ["Pressure limits", "Volume monitoring", "FiO₂ alarm", "Disconnect alarm", "SpO₂ integration"]
+      },
+      "modification_rules": [
+        "Alarm limits must not be disabled",
+        "Flow sensor replacements must be calibrated",
+        "Software updates require full ventilation test",
+        "O₂ sensor replacements require FiO₂ verification"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-012",
+      "name": "Anaesthesia Machine",
+      "category": "respiratory",
+      "categoryLabel": "Respiratory Care",
+      "color": "#38a169",
+      "iec_standard": "IEC 60601-2-13",
+      "iec_version": "2015 + AMD1:2019",
+      "iso_standard": "ISO 80601-2-13",
+      "aami_standard": "AAMI ST79 (Sterilization)",
+      "safety_class": "Type B (Gas delivery), Type BF (Monitors)",
+      "risk_level": "Class IIb (EU MDR) - Life Supporting",
+      "parameters": ["O₂ Concentration", "N₂O Concentration", "Agent Concentration", "Flow Rate", "Pressure", "CO₂ Absorption"],
+      "calibration_frequency": "6 months",
+      "electrical_tests": ["Gas Flow Accuracy", "Agent Concentration", "O₂ Monitor", "Pressure Relief", "Leak Test"],
+      "manufacturers": ["Dräger", "GE (Datex-Ohmeda)", "Penlon", "Mindray", "Maquet"],
+      "maintenance_tasks": [
+        "Verify O₂ analyzer accuracy (±2%)",
+        "Calibrate agent analyzer (Sevoflurane, Isoflurane, Desflurane)",
+        "Test gas flow accuracy (O₂, N₂O, Air)",
+        "Verify pressure relief valve function",
+        "Check CO₂ absorber (soda lime) condition",
+        "Test emergency O₂ flush function"
+      ],
+      "spare_parts": ["O₂ sensors", "Agent analyzers", "Soda lime", "Vaporizers", "Tubing"],
+      "risk_assessment": {
+        "hazards": ["Hypoxic mixture", "Agent overdose", "CO₂ rebreathing", "Explosion risk"],
+        "mitigation": ["Hypoxic guard", "Agent monitoring", "CO₂ absorption", "Anti-static measures"]
+      },
+      "modification_rules": [
+        "Hypoxic guard must not be disabled",
+        "Agent concentration limits must be maintained",
+        "Vaporizer replacements require calibration",
+        "Gas pipeline connections must match color coding"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-013",
+      "name": "CPAP / BiPAP Machine",
+      "category": "respiratory",
+      "categoryLabel": "Respiratory Care",
+      "color": "#38a169",
+      "iec_standard": "IEC 60601-2-90",
+      "iec_version": "2021",
+      "iso_standard": "ISO 80601-2-70",
+      "aami_standard": "AAMI CR50",
+      "safety_class": "Type B",
+      "risk_level": "Class IIa (EU MDR)",
+      "parameters": ["Pressure (cmH₂O)", "Flow Rate", "Leak Compensation", "Humidification", "Ramp Time"],
+      "calibration_frequency": "12 months",
+      "electrical_tests": ["Pressure Accuracy", "Flow Accuracy", "Leak Detection", "Humidifier Temperature"],
+      "manufacturers": ["ResMed", "Philips (Respironics)", "Fisher & Paykel", "DeVilbiss", "Somnetics"],
+      "maintenance_tasks": [
+        "Verify pressure output accuracy (±0.5 cmH₂O)",
+        "Test flow sensor calibration",
+        "Verify leak compensation algorithm",
+        "Check humidifier temperature (adjustable 30-80°C)",
+        "Test ramp function and auto-start",
+        "Verify data logging accuracy (if equipped)"
+      ],
+      "spare_parts": ["Tubing", "Masks", "Filters", "Humidifier chambers", "Power supplies"],
+      "risk_assessment": {
+        "hazards": ["Pressure injury", "Asphyxiation", "Burns from humidifier", "Infection"],
+        "mitigation": ["Pressure limits", "Anti-asphyxia valve", "Temperature control", "Filter replacement"]
+      },
+      "modification_rules": [
+        "Maximum pressure must not exceed 20-25 cmH₂O",
+        "Mask replacements must match flow impedance",
+        "Humidifier temperature must have safety limit",
+        "Software updates require pressure verification"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-014",
+      "name": "Oxygen Concentrator",
+      "category": "respiratory",
+      "categoryLabel": "Respiratory Care",
+      "color": "#38a169",
+      "iec_standard": "IEC 60601-1",
+      "iec_version": "2005 + AMD1:2012 + AMD2:2020",
+      "iso_standard": "ISO 80601-2-69",
+      "aami_standard": "AAMI OX11",
+      "safety_class": "Type B",
+      "risk_level": "Class IIa (EU MDR)",
+      "parameters": ["O₂ Concentration", "Flow Rate", "Outlet Pressure", "Purity Alarm", "Noise Level"],
+      "calibration_frequency": "12 months",
+      "electrical_tests": ["O₂ Concentration", "Flow Rate", "Outlet Pressure", "Purity Alarm", "Compressor Current"],
+      "manufacturers": ["Philips (Respironics)", "Invacare", "DeVilbiss", "Inogen", "O2 Concepts"],
+      "maintenance_tasks": [
+        "Verify O₂ concentration (>85% at all flow rates)",
+        "Test flow rate accuracy (0.5-5 L/min)",
+        "Verify outlet pressure (4-7 psi typical)",
+        "Test low purity alarm (<82% O₂)",
+        "Check compressor current draw",
+        "Replace intake filters and bacterial filter"
+      ],
+      "spare_parts": ["Zeolite beds", "Compressor", "Filters", "Sensors", "Tubing"],
+      "risk_assessment": {
+        "hazards": ["Low O₂ delivery", "Fire risk", "Compressor failure", "Contamination"],
+        "mitigation": ["Purity alarm", "No smoking warning", "Current monitoring", "Filter maintenance"]
+      },
+      "modification_rules": [
+        "O₂ concentration must remain >82% (alarm point)",
+        "Flow rate must not exceed rated capacity",
+        "Filter replacements must match specifications",
+        "Zeolite replacement requires regeneration cycle"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-015",
+      "name": "Haematology Analyzer",
+      "category": "lab",
+      "categoryLabel": "Lab Diagnostics",
+      "color": "#3182ce",
+      "iec_standard": "IEC 61010-1",
+      "iec_version": "2010 + AMD1:2016",
+      "iso_standard": "ISO 15189 (Lab quality)",
+      "aami_standard": "CLSI H26 (Validation)",
+      "safety_class": "Type B (Electrical), Chemical hazards",
+      "risk_level": "Class I (EU MDR) - IVD",
+      "parameters": ["WBC", "RBC", "HGB", "HCT", "MCV", "MCH", "PLT", "DIFF"],
+      "calibration_frequency": "Daily QC + 6 months full calibration",
+      "electrical_tests": ["Leakage Current", "Ground Resistance", "Sample Path Integrity"],
+      "manufacturers": ["Sysmex", "Beckman Coulter", "Abbott", "Mindray", "Horiba"],
+      "maintenance_tasks": [
+        "Run daily QC with control materials",
+        "Verify WBC/RBC/PLT accuracy with reference method",
+        "Check DIFF classification accuracy",
+        "Clean sample path and check for clogs",
+        "Verify reagent levels and expiration dates",
+        "Test pipetting accuracy (±2%)"
+      ],
+      "spare_parts": ["Sample probes", "Tubing", "Valves", "Reagents", "Control materials"],
+      "risk_assessment": {
+        "hazards": ["Incorrect diagnosis", "Reagent contamination", "Biohazard exposure", "Chemical exposure"],
+        "mitigation": ["QC protocols", "Reagent QC", "BSL-2 practices", "Ventilation"]
+      },
+      "modification_rules": [
+        "Reagent formulations must not be altered",
+        "QC ranges must be validated for any changes",
+        "Software updates require accuracy verification",
+        "Sample path modifications require carryover test"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-016",
+      "name": "Fully Auto Biochemistry Analyzer",
+      "category": "lab",
+      "categoryLabel": "Lab Diagnostics",
+      "color": "#3182ce",
+      "iec_standard": "IEC 61010-1",
+      "iec_version": "2010 + AMD1:2016",
+      "iso_standard": "ISO 15189 (Lab quality)",
+      "aami_standard": "CLSI C24 (Statistical QC)",
+      "safety_class": "Type B (Electrical), Chemical hazards",
+      "risk_level": "Class I (EU MDR) - IVD",
+      "parameters": ["Glucose", "Urea", "Creatinine", "Bilirubin", "ALT", "AST", "ALP", "Cholesterol", "Triglycerides"],
+      "calibration_frequency": "Daily QC + 6 months full calibration",
+      "electrical_tests": ["Leakage Current", "Ground Resistance", "Photometer Accuracy"],
+      "manufacturers": ["Roche", "Siemens", "Abbott", "Beckman Coulter", "Mindray"],
+      "maintenance_tasks": [
+        "Run daily QC with control sera",
+        "Verify photometer wavelength accuracy",
+        "Check pipetting precision (CV <5%)",
+        "Clean reaction cuvettes/wells",
+        "Verify reagent stability and storage conditions",
+        "Test ISE (Na⁺, K⁺, Cl⁻) accuracy with reference"
+      ],
+      "spare_parts": ["Lamp", "Cuvettes", "Pipettes", "Pumps", "Reagents", "Control materials"],
+      "risk_assessment": {
+        "hazards": ["Incorrect diagnosis", "Reagent degradation", "Cross-contamination", "Chemical exposure"],
+        "mitigation": ["QC protocols", "Reagent monitoring", "Wash cycles", "Fume extraction"]
+      },
+      "modification_rules": [
+        "Reagent formulations must remain unchanged",
+        "QC ranges must be revalidated after changes",
+        "Photometer maintenance requires absorbance check",
+        "Software updates require full QC verification"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-017",
+      "name": "Urine Analyser",
+      "category": "lab",
+      "categoryLabel": "Lab Diagnostics",
+      "color": "#3182ce",
+      "iec_standard": "IEC 61010-1",
+      "iec_version": "2010 + AMD1:2016",
+      "iso_standard": "ISO 15189 (Lab quality)",
+      "aami_standard": "CLSI GP16 (Uinalysis)",
+      "safety_class": "Type B (Electrical), Chemical hazards",
+      "risk_level": "Class I (EU MDR) - IVD",
+      "parameters": ["pH", "Protein", "Glucose", "Ketone", "Bilirubin", "Blood", "Nitrite", "Leukocytes", "SG"],
+      "calibration_frequency": "Daily QC + 12 months",
+      "electrical_tests": ["Leakage Current", "Ground Resistance", "Reflectance Accuracy"],
+      "manufacturers": ["Siemens", "Roche", "Arkray", "Mindray", "77 Elektronika"],
+      "maintenance_tasks": [
+        "Run daily QC with control urine",
+        "Verify reflectance photometer accuracy",
+        "Check strip transport mechanism",
+        "Clean optical window and sample tray",
+        "Verify reagent strip lot calibration",
+        "Test color compensation algorithm"
+      ],
+      "spare_parts": ["Optical components", "Strip feeder", "Reagent strips", "Control materials"],
+      "risk_assessment": {
+        "hazards": ["False positive/negative", "Strip degradation", "Color interference", "Biohazard"],
+        "mitigation": ["QC protocols", "Storage conditions", "Color correction", "Biosafety"]
+      },
+      "modification_rules": [
+        "Strip lots require calibration verification",
+        "Optical components must match specifications",
+        "Software updates require reflectance check",
+        "Color compensation must not be altered"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-018",
+      "name": "Semi Auto Biochemistry",
+      "category": "lab",
+      "categoryLabel": "Lab Diagnostics",
+      "color": "#3182ce",
+      "iec_standard": "IEC 61010-1",
+      "iec_version": "2010 + AMD1:2016",
+      "iso_standard": "ISO 15189 (Lab quality)",
+      "aami_standard": "CLSI C24 (Statistical QC)",
+      "safety_class": "Type B (Electrical), Chemical hazards",
+      "risk_level": "Class I (EU MDR) - IVD",
+      "parameters": ["Glucose", "Urea", "Creatinine", "Bilirubin", "ALT", "AST", "ALP"],
+      "calibration_frequency": "Daily QC + 12 months",
+      "electrical_tests": ["Leakage Current", "Ground Resistance", "Photometer Accuracy"],
+      "manufacturers": ["Mindray", "Erba", "Transasia", "Agappe", "Robonik"],
+      "maintenance_tasks": [
+        "Run daily QC with control sera",
+        "Verify photometer wavelength accuracy",
+        "Check pipetting accuracy (±5%)",
+        "Clean cuvette holder and optical path",
+        "Verify incubator temperature (37°C ±0.5°C)",
+        "Test timer accuracy (±1%)"
+      ],
+      "spare_parts": ["Lamp", "Cuvettes", "Pipettes", "Heater", "Reagents"],
+      "risk_assessment": {
+        "hazards": ["Incorrect diagnosis", "Temperature error", "Pipetting error", "Reagent degradation"],
+        "mitigation": ["QC protocols", "Temperature monitoring", "Calibration", "Reagent QC"]
+      },
+      "modification_rules": [
+        "Incubator temperature must remain 37°C ±0.5°C",
+        "Photometer maintenance requires wavelength check",
+        "Pipette calibration must be maintained",
+        "Software updates require full QC verification"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-019",
+      "name": "Autoclave",
+      "category": "lab",
+      "categoryLabel": "Lab Diagnostics",
+      "color": "#3182ce",
+      "iec_standard": "IEC 61010-2-040",
+      "iec_version": "2015",
+      "iso_standard": "ISO 17665 (Steam sterilization)",
+      "aami_standard": "AAMI ST79 (Steam sterilization)",
+      "safety_class": "Type B (Electrical), Pressure vessel",
+      "risk_level": "Class I (EU MDR) - Sterilization",
+      "parameters": ["Temperature", "Pressure", "Cycle Time", "Vacuum Level", "Dryness"],
+      "calibration_frequency": "Daily Bowie-Dick + Weekly biological + 12 months full",
+      "electrical_tests": ["Leakage Current", "Ground Resistance", "Pressure Relief Valve", "Safety Interlocks"],
+      "manufacturers": ["Tuttnauer", "Miele", "Steris", "Getinge", "Priorclave"],
+      "maintenance_tasks": [
+        "Run daily Bowie-Dick test (pre-vacuum)",
+        "Perform weekly biological indicator test (Geobacillus stearothermophilus)",
+        "Verify temperature accuracy (121°C or 134°C ±1°C)",
+        "Check pressure gauge calibration",
+        "Test vacuum pump performance",
+        "Clean chamber and verify door seal"
+      ],
+      "spare_parts": ["Heating elements", "Vacuum pump", "Door seal", "Pressure gauge", "Safety valve"],
+      "risk_assessment": {
+        "hazards": ["Sterilization failure", "Pressure explosion", "Burns", "Chemical exposure (cleaning)"],
+        "mitigation": ["Biological indicators", "Pressure relief", "Thermal insulation", "Ventilation"]
+      },
+      "modification_rules": [
+        "Cycle parameters must not be altered without validation",
+        "Pressure relief valve must not be modified",
+        "Door interlocks must not be bypassed",
+        "Biological indicator testing must continue"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-020",
+      "name": "Dental X-Ray / RVG / PSP",
+      "category": "imaging",
+      "categoryLabel": "Medical Imaging",
+      "color": "#805ad5",
+      "iec_standard": "IEC 60601-2-65",
+      "iec_version": "2014 + AMD1:2020",
+      "iso_standard": "ISO 11496 (Dental radiography)",
+      "aami_standard": "AAMI CR50",
+      "safety_class": "Type B (Radiation hazard)",
+      "risk_level": "Class IIa (EU MDR)",
+      "parameters": ["kVp", "mA", "Exposure Time", "Dose", "Resolution", "Contrast"],
+      "calibration_frequency": "12 months",
+      "electrical_tests": ["kVp Accuracy", "mA Linearity", "Timer Accuracy", "Dose Output", "Half-Value Layer"],
+      "manufacturers": ["Sirona (Dentsply)", "KaVo", "Planmeca", "Vatech", "Carestream"],
+      "maintenance_tasks": [
+        "Verify kVp accuracy (±5%)",
+        "Test mA linearity across settings",
+        "Verify timer accuracy (±5%)",
+        "Measure dose output with dosimeter",
+        "Check half-value layer (HVL) for filtration",
+        "Test RVG/PSP image quality (resolution, contrast)"
+      ],
+      "spare_parts": ["X-ray tube", "Collimator", "Sensor (RVG)", "PSP plates", "Control panel"],
+      "risk_assessment": {
+        "hazards": ["Radiation overdose", "Image quality degradation", "Tube failure", "Sensor damage"],
+        "mitigation": ["Dose monitoring", "QC phantoms", "Tube warm-up", "Handling protocols"]
+      },
+      "modification_rules": [
+        "Exposure parameters must not exceed rated limits",
+        "Filtration must not be reduced",
+        "Collimator alignment must be maintained",
+        "Software updates require dose verification"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-021",
+      "name": "Multipara Simulator",
+      "category": "testing",
+      "categoryLabel": "Testing & Calibration",
+      "color": "#d69e2e",
+      "iec_standard": "IEC 60601-1",
+      "iec_version": "2005 + AMD1:2012 + AMD2:2020",
+      "iso_standard": "ISO 13485 (Design/Production)",
+      "aami_standard": "AAMI TIR32",
+      "safety_class": "Type B (Simulator)",
+      "risk_level": "N/A (Test equipment)",
+      "parameters": ["ECG", "Respiration", "NIBP", "IBP", "Temperature", "SpO₂", "Cardiac Output"],
+      "calibration_frequency": "12 months",
+      "electrical_tests": ["Signal Accuracy", "Output Levels", "Timing"],
+      "manufacturers": ["Fluke (ProSim)", "Netech", "BC Group", "Datrend", "Rigel"],
+      "maintenance_tasks": [
+        "Verify ECG output accuracy (amplitude, rate)",
+        "Test respiration rate and impedance simulation",
+        "Verify NIBP simulation (pressure, rate)",
+        "Check temperature simulation accuracy",
+        "Test SpO₂ simulation (R-curve values)",
+        "Verify cardiac output simulation (if equipped)"
+      ],
+      "spare_parts": ["Cables", "Adapters", "Battery", "Display"],
+      "risk_assessment": {
+        "hazards": ["Incorrect calibration of monitors", "False pass/fail", "Battery failure during test"],
+        "mitigation": ["Periodic calibration", "Reference verification", "Battery monitoring"]
+      },
+      "modification_rules": [
+        "Signal outputs must match published specifications",
+        "R-curve values must not be altered",
+        "Software updates require accuracy verification",
+        "Battery replacement must not affect output"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-022",
+      "name": "Electrical Safety Analyzer",
+      "category": "testing",
+      "categoryLabel": "Testing & Calibration",
+      "color": "#d69e2e",
+      "iec_standard": "IEC 61010-1",
+      "iec_version": "2010 + AMD1:2016",
+      "iso_standard": "ISO 17025 (Calibration labs)",
+      "aami_standard": "AAMI TIR32",
+      "safety_class": "Type B (Test equipment)",
+      "risk_level": "N/A (Test equipment)",
+      "parameters": ["Ground Resistance", "Leakage Currents", "Insulation Resistance", "Patient Lead Isolation", "Enclosure Leakage"],
+      "calibration_frequency": "12 months",
+      "electrical_tests": ["Self-test", "Reference verification"],
+      "manufacturers": ["Fluke (ESA612/620)", "Rigel", "BC Group", "Datrend", "Netech"],
+      "maintenance_tasks": [
+        "Run self-test and verify internal references",
+        "Calibrate against NIST-traceable standards",
+        "Verify ground resistance accuracy (<0.1Ω)",
+        "Test leakage current accuracy (<1μA error)",
+        "Check insulation resistance range (>2MΩ)",
+        "Verify patient lead isolation accuracy"
+      ],
+      "spare_parts": ["Test leads", "Probes", "Fuses", "Battery"],
+      "risk_assessment": {
+        "hazards": ["False safety pass", "Incorrect leakage measurement", "Ground fault undetected"],
+        "mitigation": ["NIST calibration", "Self-test", "Reference checks"]
+      },
+      "modification_rules": [
+        "Calibration must remain NIST-traceable",
+        "Test lead impedance must be verified",
+        "Software updates require accuracy check",
+        "Measurement ranges must not be altered"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-023",
+      "name": "Defibrillator/Infusion Analyzer",
+      "category": "testing",
+      "categoryLabel": "Testing & Calibration",
+      "color": "#d69e2e",
+      "iec_standard": "IEC 61010-1",
+      "iec_version": "2010 + AMD1:2016",
+      "iso_standard": "ISO 17025 (Calibration labs)",
+      "aami_standard": "AAMI DF80, AAMI ID26",
+      "safety_class": "Type B (Test equipment)",
+      "risk_level": "N/A (Test equipment)",
+      "parameters": ["Energy (J)", "Waveform", "Charge Time", "Flow Rate", "Occlusion Pressure"],
+      "calibration_frequency": "12 months",
+      "electrical_tests": ["Self-test", "Reference verification"],
+      "manufacturers": ["Fluke", "Rigel", "BC Group", "Datrend", "Netech"],
+      "maintenance_tasks": [
+        "Verify energy measurement accuracy (±1J or ±5%)",
+        "Test waveform analysis (biphasic/monophasic)",
+        "Verify charge time measurement",
+        "Check flow rate accuracy (±1%)",
+        "Test occlusion pressure measurement",
+        "Verify alarm detection timing"
+      ],
+      "spare_parts": ["Test loads", "Adapters", "Tubing", "Battery"],
+      "risk_assessment": {
+        "hazards": ["False energy reading", "Flow error", "Missed alarm"],
+        "mitigation": ["Reference calibration", "Gravimetric check", "Timing verification"]
+      },
+      "modification_rules": [
+        "Energy reference must be traceable",
+        "Flow measurement requires gravimetric verification",
+        "Software updates require full accuracy check",
+        "Test loads must match rated impedances"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-024",
+      "name": "Gas Flow Analyzer",
+      "category": "testing",
+      "categoryLabel": "Testing & Calibration",
+      "color": "#d69e2e",
+      "iec_standard": "IEC 61010-1",
+      "iec_version": "2010 + AMD1:2016",
+      "iso_standard": "ISO 17025 (Calibration labs)",
+      "aami_standard": "AAMI CR50",
+      "safety_class": "Type B (Test equipment)",
+      "risk_level": "N/A (Test equipment)",
+      "parameters": ["Flow Rate", "Pressure", "Volume", "O₂ Concentration", "CO₂ Concentration"],
+      "calibration_frequency": "12 months",
+      "electrical_tests": ["Self-test", "Reference verification"],
+      "manufacturers": ["Fluke (VT900A)", "TSI", "IMT Analytics", "Rigel", "BC Group"],
+      "maintenance_tasks": [
+        "Verify flow accuracy (±1% or ±0.5 L/min)",
+        "Test pressure accuracy (±0.5 cmH₂O)",
+        "Verify volume measurement (±3%)",
+        "Check O₂ sensor accuracy (±1%)",
+        "Test CO₂ measurement (if equipped)",
+        "Verify gas composition analysis"
+      ],
+      "spare_parts": ["Flow sensors", "Pressure transducers", "O₂ sensors", "Filters", "Tubing"],
+      "risk_assessment": {
+        "hazards": ["Flow error", "Pressure misreading", "Gas composition error"],
+        "mitigation": ["Reference calibration", "Pressure standard", "Gas standard"]
+      },
+      "modification_rules": [
+        "Flow reference must be traceable",
+        "O₂ sensor requires periodic replacement",
+        "Software updates require accuracy verification",
+        "Gas standards must be certified"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    },
+    {
+      "id": "DEV-025",
+      "name": "Electrosurgery Analyzer",
+      "category": "testing",
+      "categoryLabel": "Testing & Calibration",
+      "color": "#d69e2e",
+      "iec_standard": "IEC 61010-1",
+      "iec_version": "2010 + AMD1:2016",
+      "iso_standard": "ISO 17025 (Calibration labs)",
+      "aami_standard": "AAMI HF18",
+      "safety_class": "Type B (Test equipment)",
+      "risk_level": "N/A (Test equipment)",
+      "parameters": ["Output Power (W)", "Peak Voltage", "Crest Factor", "REM Current", "Load Resistance"],
+      "calibration_frequency": "12 months",
+      "electrical_tests": ["Self-test", "Reference verification"],
+      "manufacturers": ["Fluke (QA-ES)", "Rigel", "BC Group", "Datrend", "Netech"],
+      "maintenance_tasks": [
+        "Verify power measurement accuracy (±5%)",
+        "Test peak voltage measurement",
+        "Verify crest factor calculation",
+        "Check REM current measurement (<1mA)",
+        "Test load resistance range (50-2000Ω)",
+        "Verify waveform analysis (cut/coag/bipolar)"
+      ],
+      "spare_parts": ["Test loads", "Cables", "Probes", "Battery"],
+      "risk_assessment": {
+        "hazards": ["Power misreading", "REM false pass", "Waveform misclassification"],
+        "mitigation": ["Reference calibration", "REM verification", "Waveform standard"]
+      },
+      "modification_rules": [
+        "Power reference must be traceable",
+        "Load resistances must match ESU ratings",
+        "Software updates require power verification",
+        "REM measurement must remain accurate"
+      ],
+      "media_folder_url": "",
+      "maintenance_log": []
+    }
+  ]
+}
